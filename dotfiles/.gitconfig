@@ -1,0 +1,113 @@
+[alias]
+  # List aliases (https://www.becomebetterprogrammer.com/git-alias/).
+  aliases = git config --get-regexp alias
+  # A better git branch (https://snyk.io/blog/10-git-aliases-for-faster-and-productive-git-workflow/).
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  # Delete merged branches (https://stackoverflow.com/questions/35171513/how-to-alias-in-git-delete-merged-branches).
+  cleanup = !git branch --merged | grep -vE 'main|master|\\*' | xargs -n 1 git branch -d
+  # Temporarily ignore files (https://coderwall.com/p/gjp15g/git-temporarily-ignoring-files).
+  freeze = !git update-index --assume-unchanged
+  unfreeze = !git update-index --no-assume-unchanged
+  frozen = !git ls-files -v | grep ^[a-z]
+  # A better git log.
+  # https://www.git-scm.com/docs/git-log#Documentation/git-log.txt---graph
+  # https://www.git-scm.com/docs/git-log#Documentation/git-log.txt---abbrev-commit
+  # https://www.git-scm.com/docs/git-log#Documentation/git-log.txt---dateltformatgt
+  # https://www.git-scm.com/docs/git-log#_pretty_formats
+  lg = log --graph --abbrev-commit --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  # Push the current branch to the remote "origin", and set it to track the upstream branch (https://tekin.co.uk/2020/01/git-alias-to-push-and-set-upstream-trackng-on-a-branch).
+  publish = push -u origin HEAD
+  # Commit work in progress.
+  wip = !git add --all && git commit -m
+  # Useful shortcuts
+  co = checkout
+  cob = checkout -b
+  cm = commit -m
+  p = pull
+  pr = pull --rebase
+  s = status
+
+[color]
+  # Colorize output.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-colorui
+  ui = auto
+
+[commit]
+  # All commits should be GPG signed.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-commitgpgSign
+  gpgSign = true
+
+[core]
+  # Global gitignore.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreexcludesFile
+  excludesFile = ~/.gitignore_global
+
+[diff]
+  # Colors moved lines in diffs differently.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffcolorMoved
+  colorMoved = true
+  # Uses a prefix pair that is different from the standard "a/" and "b/" depending on what is being compared
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffmnemonicPrefix
+  mnemonicprefix = true
+
+[fetch]
+  # Remove remote-tracking references that no longer exist on the remote.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchprune
+  prune = true
+  # Remove any local tags that no longer exist on the remote
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchpruneTags
+  pruneTags = true
+
+# Use diff-highlight for diffs. See https://git.kernel.org/pub/scm/git/git.git/tree/contrib/diff-highlight/README or
+# https://veronneau.org/a-better-git-diff.html.
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+
+[pull]
+  # fast-forward only
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase
+  ff = only
+  # Rebase branches on top of the fetched branch, instead of merging.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase
+  rebase = true
+
+[push]
+  # Pushes the current branch with the same name on the remote.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+  default = simple
+  # Pushes annotated tags in refs/tags that are missing from the remote.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushfollowTags
+  followTags = true
+
+[rebase]
+  # Always show a diffstat of what changed upstream since the last rebase.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebasestat
+  stat = true
+
+[status]
+  # Show individual files in untracked directories.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-statusshowUntrackedFiles
+  showUntrackedFiles = all
+
+[tag]
+  # All tags should be GPG signed.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-taggpgSign
+  gpgSign = true
+  forceSignAnnotated = true
+
+
+[transfer]
+  # Abort when a malformed object or a link to a nonexistent object is detected.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-transferfsckObjects
+  fsckObjects = true
+
+[user]
+  # What ends up in the author and committer field of commit objects.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-username
+  name = Marc Wrobel
+  email = marc.wrobel@gmail.com
+  # Force git to use this GPG key.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-usersigningKey
+  signingkey = marc.wrobel@gmail.com

@@ -13,5 +13,5 @@ asdf install
 You can then run the playbook with:
 
 ```bash
-uvx --from ansible-core ansible-playbook --ask-become-pass --inventory localhost, setup.yml
+uvx --from ansible ansible-playbook --ask-become-pass --inventory localhost, setup.yml
 ```

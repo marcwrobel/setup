@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# title             : pdf
+# description       : PDF files manipulation from bash
+# os                : debian
+# requires          : libcam-pdf-perl-1.58-2 (deb)
+# notes             : I sincerely hope the name will not clash with
+#                     another command...
+#=======================================================================
+
+set -e
+
+function error() {
+  echo "$(basename $0): $1
+Try '$(basename $0) --help' for more information."
+  exit $2
+}
+
+function usage() {
+  echo "Usage: $(basename $0) [--title | --subject | --keywords | --created | --updated | --author | --creator | --producer] FILE
+PDF files manipulation from bash.
+
+  -t, --title       display the given pdf FILE author
+  -s, --subject     display the given pdf FILE subject
+  -k, --keywords    display the given pdf FILE keywords
+  -c, --created     display the given pdf FILE creation date
+  -u, --updated     display the given pdf FILE last update date
+  -A, --author      display the given pdf FILE author
+  -C, --creator     display the given pdf FILE creator
+  -P, --producer    display the given pdf FILE producer
+
+  --filename        display a suitable filename for the given pdf file.
+                    The given filename follows the pattern :
+                      <updated>-<title>.pdf
+
+  -h, --help        display this help and exit
+
+FILE is mandatory and MUST be a PDF file.
+
+Examples:
+  $(basename $0) -t test.pdf    Output 'test.pdf' title."
+}
+
+function getPdfInformation() {
+  file=$1
+  info=$2
+
+  if [ -z "$file" -o -z "$info" ]; then error "missing pdf file parameter" 1; fi
+
+  echo $(perl -e "use CAM::PDF;
+my \$pdf = CAM::PDF->new('$file');
+my \$info = \$pdf->getValue(\$pdf->{trailer}->{Info});
+print \$info->{$info}->{value};")
+}
+
+function sanitize() {
+  str=$1
+  str=${str//_/} # strip underscores
+  str=${str// /_} # replace spaces with underscores
+  str=${str//[^a-zA-Z0-9_]/} # clean out anything that's not alphanumeric or an underscore
+  echo -n $str | tr A-Z a-z | sed -r 's/_+/_/g' # lowercase with TR
+}
+
+
+case "$1" in
+  -h|--help)
+    usage
+  ;;
+  
+  -t|--title)
+    getPdfInformation $2 "Title"
+  ;;
+  -s|--subject)
+    getPdfInformation $2 "Subject"
+  ;;
+  -k|--keywords)
+    getPdfInformation $2 "Keywords"
+  ;;
+  -c|--created)
+    getPdfInformation $2 "CreationDate"
+  ;;
+  -u|--updated)
+    getPdfInformation $2 "ModDate"
+  ;;
+  -A|--author)
+    getPdfInformation $2 "Author"
+  ;;
+  -C|--creator)
+    getPdfInformation $2 "Creator"
+  ;;
+  -P|--producer)
+    getPdfInformation $2 "Producer"
+  ;;
+  
+  --filename)
+    updated=$(getPdfInformation $2 "ModDate")
+    title=$(getPdfInformation $2 "Title")
+    echo "$(sanitize "$title")-${updated:2:8}.pdf"
+  ;;
+  
+  *)
+    error "invalid option -- '$1'" 1
+  ;;
+esac

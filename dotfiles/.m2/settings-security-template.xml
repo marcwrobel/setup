@@ -1,0 +1,4 @@
+<!-- See https://maven.apache.org/guides/mini/guide-encryption.html. -->
+<settingsSecurity>
+  <master>$MASTER_PASSWORD_BASE64</master>
+</settingsSecurity>
