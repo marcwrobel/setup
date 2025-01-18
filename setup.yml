@@ -2,27 +2,22 @@
 - name: "Set up local environment"
   hosts: localhost
   connection: local
-  tasks:
-    - name: Set up dotfiles
-      ansible.builtin.copy:
-        src: "{{ item }}"
-        dest: '{{ ansible_env.HOME }}/{{ item | regex_replace(".*dotfiles/", "") }}'
-        owner: "{{ ansible_user_id }}"
-        mode: "preserve"
-      with_fileglob:
-        - "./dotfiles/*"
-        - "./dotfiles/.*"
-        - "./dotfiles/.bashrc.d/*"
-        - "./dotfiles/.m2/*"
-        - "./dotfiles/bin/*"
-
-    - name: Install packages
-      become: true
-      ansible.builtin.package:
-        name:
+  roles:
+    - role: "local.setup.packages"
+      tags: ["packages"]
+      vars:
+        packages__blacklist:
+          - "telnet" # use netcat instead
+        packages__list:
           # Clients
           - "curl" # command line tool for transferring data with URL syntax
           - "httpie" # cURL-like tool for humans
+          - "rsync" # fast, versatile, remote (and local) file-copying tool
+          # Compression
+          - "bzip2" # high-quality block-sorting file compressor
+          - "unzip" # de-archiver for .zip files
+          - "zip" # archiver for .zip files
+          - "zstd" # fast lossless compression algorithm -- CLI tool
           # Desktop
           - "chromium" # The open-source version of Chrome
           - "fonts-recommended" # set of recommended fonts
@@ -40,8 +35,11 @@
           - "geany-plugin-extrasel" # extra selection plugin for Geany
           # System
           - "htop" # Interactive process viewer
+          - "lsb-release" # linux Standard Base version reporting utility
           - "ncdu" # ncurses disk usage viewer
           - "netcat-openbsd" # TCP/IP swiss army knife
+          - "util-linux" # miscellaneous system utilities
+          - "uptimed" # daemon to track uptimes, especially the high ones
           # Misc
           - "dos2unix" # convert text file line endings between CRLF and LF
           - "gnupg" # GNU privacy guard - a free PGP replacement
@@ -50,4 +48,17 @@
           - "pass" # lightweight directory-based password manager
           - "uuid" # Universally Unique Identifier Command-Line Tool
           - "renrot" # rename and rotate files according to EXIF tags
-        state: present
+
+  tasks:
+    - name: Set up dotfiles
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: '{{ ansible_env.HOME }}/{{ item | regex_replace(".*dotfiles/", "") }}'
+        owner: "{{ ansible_user_id }}"
+        mode: "preserve"
+      with_fileglob:
+        - "./dotfiles/*"
+        - "./dotfiles/.*"
+        - "./dotfiles/.bashrc.d/*"
+        - "./dotfiles/.m2/*"
+        - "./dotfiles/bin/*"
