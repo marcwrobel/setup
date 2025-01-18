@@ -13,11 +13,18 @@ asdf install
 You can then run the playbook with (it will use a localhost-only inventory by default):
 
 ```bash
-uvx --from ansible ansible-playbook --ask-become-pass setup.yml
+uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml
 ```
 
 You can validate code with:
 
 ```bash
-uvx --from ansible-lint ansible-lint --strict --fix=all .
+uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all .
+```
+
+You can get tools version with:
+
+```bash
+uvx --from 'ansible>=11' ansible --version
+uvx --from 'ansible-lint>=24.12' ansible-lint --nocolor --version
 ```
