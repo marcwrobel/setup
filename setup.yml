@@ -1,51 +1,53 @@
-- hosts: localhost
+---
+- name: "Set up local environment"
+  hosts: localhost
   connection: local
   tasks:
     - name: Set up dotfiles
       ansible.builtin.copy:
-        src: '{{ item }}'
-        dest: '{{ ansible_env.HOME }}/{{ item | regex_replace(".*dotfiles/", "")}}'
-        owner: '{{ ansible_user_id }}'
-        mode: 'preserve'
+        src: "{{ item }}"
+        dest: '{{ ansible_env.HOME }}/{{ item | regex_replace(".*dotfiles/", "") }}'
+        owner: "{{ ansible_user_id }}"
+        mode: "preserve"
       with_fileglob:
-        - './dotfiles/*'
-        - './dotfiles/.*'
-        - './dotfiles/.bashrc.d/*'
-        - './dotfiles/.m2/*'
-        - './dotfiles/bin/*'
+        - "./dotfiles/*"
+        - "./dotfiles/.*"
+        - "./dotfiles/.bashrc.d/*"
+        - "./dotfiles/.m2/*"
+        - "./dotfiles/bin/*"
 
     - name: Install packages
       become: true
       ansible.builtin.package:
         name:
           # Clients
-          - 'curl' # command line tool for transferring data with URL syntax
-          - 'httpie' # cURL-like tool for humans
+          - "curl" # command line tool for transferring data with URL syntax
+          - "httpie" # cURL-like tool for humans
           # Desktop
-          - 'chromium' # The open-source version of Chrome
-          - 'fonts-recommended' # set of recommended fonts
-          - 'gthumb' # image viewer and browser
-          - 'meld' # graphical tool to diff and merge files
+          - "chromium" # The open-source version of Chrome
+          - "fonts-recommended" # set of recommended fonts
+          - "gthumb" # image viewer and browser
+          - "meld" # graphical tool to diff and merge files
           # Development
-          - 'build-essential' # Required by asdf, nodejs
-          - 'git' # fast, scalable, distributed revision control system
-          - 'gitg' # git repository viewer
-          - 'hexedit' # viewer and editor in hexadecimal or ASCII for files or devices
-          - 'libssl-dev' # needed while installing ruby using asdf
+          - "build-essential" # Required by asdf, nodejs
+          - "git" # fast, scalable, distributed revision control system
+          - "gitg" # git repository viewer
+          - "hexedit" # viewer and editor in hexadecimal or ASCII for files or devices
+          - "libssl-dev" # needed while installing ruby using asdf
           # Editors
-          - 'geany' # fast and lightweight IDE
-          - 'geany-plugins' # set of plugins for Geany
-          - 'geany-plugin-extrasel' # extra selection plugin for Geany
+          - "geany" # fast and lightweight IDE
+          - "geany-plugins" # set of plugins for Geany
+          - "geany-plugin-extrasel" # extra selection plugin for Geany
           # System
-          - 'htop' # Interactive process viewer
-          - 'ncdu' # ncurses disk usage viewer
-          - 'netcat-openbsd' # TCP/IP swiss army knife
+          - "htop" # Interactive process viewer
+          - "ncdu" # ncurses disk usage viewer
+          - "netcat-openbsd" # TCP/IP swiss army knife
           # Misc
-          - 'dos2unix' # convert text file line endings between CRLF and LF
-          - 'gnupg' # GNU privacy guard - a free PGP replacement
-          - 'jc' # JSON CLI output utility
-          - 'jq' # lightweight and flexible command-line JSON processor
-          - 'pass' # lightweight directory-based password manager
-          - 'uuid' # Universally Unique Identifier Command-Line Tool
-          - 'renrot' # rename and rotate files according to EXIF tags
+          - "dos2unix" # convert text file line endings between CRLF and LF
+          - "gnupg" # GNU privacy guard - a free PGP replacement
+          - "jc" # JSON CLI output utility
+          - "jq" # lightweight and flexible command-line JSON processor
+          - "pass" # lightweight directory-based password manager
+          - "uuid" # Universally Unique Identifier Command-Line Tool
+          - "renrot" # rename and rotate files according to EXIF tags
         state: present

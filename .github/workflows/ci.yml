@@ -1,33 +1,33 @@
 ---
-name: 'CI'
+name: "CI"
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: ["main"]
   pull_request:
-    branches: [ 'main' ]
+    branches: ["main"]
   schedule:
-    - cron: '6 6 * * 6'
+    - cron: "6 6 * * 6"
 
 jobs:
   lint:
-    name: 'Lint'
-    runs-on: 'ubuntu-latest'
+    name: "Lint"
+    runs-on: "ubuntu-latest"
     steps:
-      - name: 'Check out the codebase'
-        uses: 'actions/checkout@v3'
+      - name: "Check out the codebase"
+        uses: "actions/checkout@v3"
 
-      - name: 'Set up Python'
-        uses: 'actions/setup-python@v5'
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
         with:
           python-version-file: ".python-version"
 
-      - name: 'Install uv'
-        uses: 'astral-sh/setup-uv@v5'
+      - name: "Install uv"
+        uses: "astral-sh/setup-uv@v5"
         with:
           enable-cache: true
-          version: '0.5.21'
+          version: "0.5.21"
 
-      - name: 'Run linters'
+      - name: "Run linters"
         run: |
-          uvx --from 'ansible-lint>=24.12' ansible-lint --strict .
+          uvx --from 'ansible-lint>=24.12' ansible-lint --strict

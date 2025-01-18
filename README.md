@@ -1,4 +1,4 @@
-Material for setting up a laptop after it was installed.
+Material for setting up my environment after it was installed.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml
 You can validate code with:
 
 ```bash
-uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all .
+uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all
 ```
 
 You can get tools version with:
