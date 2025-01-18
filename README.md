@@ -10,10 +10,10 @@ asdf plugin-add uv
 asdf install
 ```
 
-You can then run the playbook with:
+You can then run the playbook with (it will use a localhost-only inventory by default):
 
 ```bash
-uvx --from ansible ansible-playbook --ask-become-pass --inventory localhost, setup.yml
+uvx --from ansible ansible-playbook --ask-become-pass setup.yml
 ```
 
 You can validate code with:
