@@ -1,4 +1,4 @@
-Material for setting up my environment after it was installed.
+Material for setting up my environment.
 
 ## Getting Started
 
@@ -16,11 +16,15 @@ You can then run the playbook with (it will use a localhost-only inventory by de
 uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml
 ```
 
-You can validate code with:
+## Linting
+
+Code linting is done with `ansible-lint`, and is automatically run by the CI pipeline. You can run it locally with:
 
 ```bash
 uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all
 ```
+
+## Tools versions
 
 You can get tools version with:
 
