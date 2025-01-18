@@ -1,0 +1,32 @@
+---
+name: 'CI'
+
+on:
+  push:
+    branches: [ 'main' ]
+  pull_request:
+    branches: [ 'main' ]
+  schedule:
+    - cron: '6 6 * * 6'
+
+jobs:
+  lint:
+    name: 'Lint'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Check out the codebase'
+        uses: 'actions/checkout@v3'
+
+      - name: 'Set up Python'
+        uses: 'actions/setup-python@v5'
+        with:
+          python-version-file: ".python-version"
+
+      - name: 'Install uv'
+        uses: 'astral-sh/setup-uv@v5'
+        with:
+          enable-cache: true
+          version: '0.5.21'
+
+      - name: 'Run linters'
+        run: 'uvx --from ansible-lint ansible-lint --strict .'

@@ -15,3 +15,9 @@ You can then run the playbook with:
 ```bash
 uvx --from ansible ansible-playbook --ask-become-pass --inventory localhost, setup.yml
 ```
+
+You can validate code with:
+
+```bash
+uvx --from ansible-lint ansible-lint --strict --fix=all .
+```
