@@ -1,9 +1,10 @@
-github-cli 2.64.0
+github-cli 2.65.0
 gradle 8.3
-#java temurin-8.0.382+5
-#java temurin-11.0.20+101
-java temurin-17.0.8+101
-maven 3.9.4
-nodejs 18.17.1
+#java temurin-8.0.432+6
+#java temurin-11.0.25+9
+#java temurin-17.0.13+11
+java temurin-21.0.5+11.0.LTS
+maven 3.9.9
+nodejs 22.13.0
 quarkus 3.3.1
 ruby 3.3.6
