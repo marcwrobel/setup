@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   roles:
-    - role: "local.setup.packages"
+    - role: "packages"
       tags: ["packages"]
       vars:
         packages__blacklist:
@@ -49,7 +49,7 @@
           - "uuid" # Universally Unique Identifier Command-Line Tool
           - "renrot" # rename and rotate files according to EXIF tags
 
-    - role: "local.setup.gnome"
+    - role: "gnome"
       vars:
         gnome__dconf:
           - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "['<Alt>Tab']" }
