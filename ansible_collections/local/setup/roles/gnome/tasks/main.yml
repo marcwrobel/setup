@@ -1,0 +1,26 @@
+---
+- name: Check if dconf is installed
+  ansible.builtin.shell: "type dconf" # noqa: command-instead-of-shell
+  register: "gnome__dconf_check"
+  ignore_errors: true
+  changed_when: false
+
+- name: Set dconf present fact
+  ansible.builtin.set_fact:
+    gnome__dconf_present: "{{ gnome__dconf_check.rc == 0 }}"
+
+- name: Install community.general.dconf required packages
+  ansible.builtin.package:
+    name: "python3-psutil"
+    state: "present"
+  when: "gnome__dconf_present"
+  become: true
+
+# https://superuser.com/a/1029822
+- name: Switch window instead of application
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  when: "gnome__dconf_present"
+  loop: "{{ gnome__dconf }}"

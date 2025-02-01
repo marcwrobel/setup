@@ -1,6 +1,5 @@
 ---
-# Packages to uninstall.
+# Name of the packages to uninstall.
 packages__blacklist: []
-
-# Packages to install.
+# Name of the packages to install.
 packages__list: []

@@ -1,3 +1,7 @@
 ---
 profile: production
 use_default_rules: true
+
+exclude_paths:
+  # ansible-lint with uvx triggers an unskippable syntax-check[unknown-module] because of community.general.dconf
+  - ansible_collections/local/setup/roles/gnome/tasks/main.yml

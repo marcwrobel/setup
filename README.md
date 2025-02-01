@@ -16,12 +16,20 @@ You can then run the playbook with (it will use a localhost-only inventory by de
 uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml
 ```
 
+## Running parts of the playbook
+
+You can run specific parts of the playbook with:
+
+```bash
+uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --tags <tag>
+```
+
 ## Linting
 
 Code linting is done with `ansible-lint`, and is automatically run by the CI pipeline. You can run it locally with:
 
 ```bash
-uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all
+uvx ansible-lint --strict --fix=all
 ```
 
 ## Tools versions
@@ -29,6 +37,6 @@ uvx --from 'ansible-lint>=24.12' ansible-lint --strict --fix=all
 You can get tools version with:
 
 ```bash
-uvx --from 'ansible>=11' ansible --version
-uvx --from 'ansible-lint>=24.12' ansible-lint --nocolor --version
+uvx --from 'ansible' ansible --version
+uvx ansible-lint --nocolor --version
 ```

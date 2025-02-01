@@ -30,4 +30,4 @@ jobs:
 
       - name: "Run linters"
         run: |
-          uvx --from 'ansible-lint>=24.12' ansible-lint --strict
+          uvx ansible-lint --strict
