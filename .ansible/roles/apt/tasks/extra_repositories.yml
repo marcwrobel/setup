@@ -1,0 +1,26 @@
+---
+- name: "Install repository key for {{ item.name }}"
+  ansible.builtin.get_url:
+    url: "{{ item.key_url }}"
+    dest: "/usr/share/keyrings/{{ item.name }}.{{ item.key_format }}"
+    mode: "0644"
+    force: true # replace if the content changes
+  when: "item.state == 'present'"
+  become: true
+
+- name: "Uninstall repository key for {{ item.name }}" # noqa: risky-file-permissions (only delete files)
+  ansible.builtin.file:
+    path: "/etc/apt/trusted.gpg.d/{{ item.name }}.{{ item.key_format }}"
+    state: "absent"
+  when: "item.state == 'absent'"
+  become: true
+
+- name: "{{ (item.state == 'present') | ternary('Install', 'Uninstall') }} {{ item.name }} repository" # noqa name[template] cannot avoid this one
+  ansible.builtin.apt_repository:
+    filename: "{{ item.name }}"
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}" # noqa: args[module] (variable)
+    update_cache: false
+  become: true
+  notify:
+    - "Update package indexes"

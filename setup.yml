@@ -5,13 +5,14 @@
   roles:
     - { role: "bootstrap", tags: ["bootstrap"] }
     - { role: "banner", tags: ["banner"] }
+    - { role: "apt", tags: ["apt"] }
 
     - role: "packages"
       tags: ["packages"]
       vars:
         packages__blacklist:
           - "telnet" # use netcat instead
-        packages__list:
+        packages__list: # See https://pkgs.org/
           # Clients
           - "curl" # command line tool for transferring data with URL syntax
           - "httpie" # cURL-like tool for humans

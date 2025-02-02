@@ -1,0 +1,49 @@
+---
+- name: "Remove unneeded default APT configurations"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: "absent"
+  loop:
+    - "/etc/apt/apt.conf.d/00CDMountPoint"
+    - "/etc/apt/apt.conf.d/00trustcdrom"
+  become: true
+
+- name: "Copy configuration files and scripts"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop:
+    - "etc/apt/apt.conf.d/00NoInstallRecommends"
+  become: true
+
+- name: "Configure default repositories"
+  ansible.builtin.template:
+    src: "etc/apt/sources.list-{{ ansible_distribution }}.j2"
+    dest: "/etc/apt/sources.list"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+    - "Update package indexes"
+  become: true
+
+- name: "Configure extra repositories"
+  ansible.builtin.include_tasks: "extra_repositories.yml"
+  loop: "{{ apt__extra_repositories }}"
+
+# Required because package indexes must be updated before installing packages
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: "Install base packages"
+  ansible.builtin.package:
+    name:
+      - "apt-show-versions"
+      - "apt-transport-https"
+      - "ca-certificates"
+      - "needrestart"
+    state: "present"
+  become: true
