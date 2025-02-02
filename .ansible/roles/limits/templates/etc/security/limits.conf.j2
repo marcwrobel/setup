@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+{% for limit in limits__all %}
+{{ "%-30s" | format(limit.domain) }} {{ "%-10s" | format(limit.type) }} {{ "%-15s" | format(limit.item) }} {{ limit.value }}
+{% endfor %}

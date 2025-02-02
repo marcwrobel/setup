@@ -1,0 +1,19 @@
+---
+- name: Enable pam limits
+  ansible.builtin.lineinfile:
+    dest: "/etc/pam.d/su"
+    mode: "0644"
+    line: "session    required   pam_limits.so"
+    regexp: "session *required *pam_limits.so"
+  become: true
+
+- name: Set default limits
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+  loop:
+    - "etc/security/limits.conf"

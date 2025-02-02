@@ -6,6 +6,7 @@
     - { role: "bootstrap", tags: ["bootstrap"] }
     - { role: "banner", tags: ["banner"] }
     - { role: "sysctl", tags: ["sysctl"] }
+    - { role: "limits", tags: ["limits"] }
     - { role: "root", tags: ["root"] }
     - { role: "sudo", tags: ["sudo"] }
 

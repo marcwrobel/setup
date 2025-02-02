@@ -1,0 +1,18 @@
+---
+
+# Limits are low by default, even for root. They have to be increased as needed.
+# Note that root's limits are not unlimited for security reasons (for example to prevent accidental fork-bomb).
+
+# Default limits
+# Each limit must have the following attribute (all of them are mandatory) : domain, type, item, value.
+# See limits.conf manual for more information.
+limits__defaults:
+  - { domain: "*", type: "-", item: "nproc", value: "1024" }
+  - { domain: "root", type: "-", item: "nproc", value: "4096" }
+  - { domain: "*", type: "-", item: "nofile", value: "1024" }
+  - { domain: "root", type: "-", item: "nofile", value: "8192" }
+
+# Additional limits. To be overridden in groups / hosts vars.
+limits__additional: []
+# All limits. Should not be overridden.
+limits__all: "{{ limits__defaults + limits__additional }}"

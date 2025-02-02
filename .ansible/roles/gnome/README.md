@@ -1,4 +1,4 @@
-# packages
+# gnome
 
 Manage Gnome configuration.
 
