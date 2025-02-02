@@ -1,5 +1,5 @@
 ---
-- name: "Set up local environment"
+- name: "Set up a local Debian environment"
   hosts: localhost
   connection: local
   roles:
@@ -19,8 +19,9 @@
             repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
             state: "present"
 
+    - { role: "openssh_client", tags: ["ssh"] }
     - { role: "git", tags: ["git"] }
-    - { role: "etckeeper", tags: ["etckeeper"] }
+    - { role: "etckeeper", tags: ["etc"] }
     - { role: "vim", tags: ["vim"] }
 
     - role: "packages"
