@@ -2,7 +2,7 @@
 - name: "Install repository key for {{ item.name }}"
   ansible.builtin.get_url:
     url: "{{ item.key_url }}"
-    dest: "/usr/share/keyrings/{{ item.name }}.{{ item.key_format }}"
+    dest: "/etc/apt/keyrings/{{ item.name }}.{{ item.key_format }}"
     mode: "0644"
     force: true # replace if the content changes
   when: "item.state == 'present'"

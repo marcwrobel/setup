@@ -8,7 +8,17 @@
     - { role: "sysctl", tags: ["sysctl"] }
     - { role: "root", tags: ["root"] }
     - { role: "sudo", tags: ["sudo"] }
-    - { role: "apt", tags: ["apt"] }
+
+    - role: "apt"
+      tags: ["apt"]
+      vars:
+        apt__extra_repositories:
+          - name: "docker"
+            key_url: "https://download.docker.com/linux/debian/gpg"
+            key_format: "asc"
+            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+            state: "present"
+
     - { role: "git", tags: ["git"] }
     - { role: "etckeeper", tags: ["etckeeper"] }
     - { role: "vim", tags: ["vim"] }
@@ -18,6 +28,12 @@
       vars:
         packages__blacklist:
           - "telnet" # use netcat instead
+          - "containerd" # see https://docs.docker.com/engine/install/debian/
+          - "docker.io" # see https://docs.docker.com/engine/install/debian/
+          - "docker-compose" # see https://docs.docker.com/engine/install/debian/
+          - "docker-doc" # see https://docs.docker.com/engine/install/debian/
+          - "podman-docker" # see https://docs.docker.com/engine/install/debian/
+          - "runc" # see https://docs.docker.com/engine/install/debian/
         packages__list: # See https://pkgs.org/
           # Clients
           - "curl" # command line tool for transferring data with URL syntax
@@ -25,6 +41,7 @@
           - "rsync" # fast, versatile, remote (and local) file-copying tool
           # Compression
           - "bzip2" # high-quality block-sorting file compressor
+          - "pigz" # parallel implementation of gzip
           - "unzip" # de-archiver for .zip files
           - "zip" # archiver for .zip files
           - "zstd" # fast lossless compression algorithm -- CLI tool
@@ -58,17 +75,26 @@
           - "pass" # lightweight directory-based password manager
           - "uuid" # Universally Unique Identifier Command-Line Tool
           - "renrot" # rename and rotate files according to EXIF tags
+          # Docker external repository, see https://docs.docker.com/engine/install/debian/
+          - "cgroupfs-mount"
+          - "containerd.io"
+          - "docker-buildx-plugin" # from docker
+          - "docker-ce"
+          - "docker-ce-cli"
+          - "docker-ce-rootless-extras"
+          - "docker-compose-plugin" # from docker
+          - "slirp4netns"
 
     - role: "gnome"
+      tags: ["gnome"]
       vars:
         gnome__dconf:
           - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "['<Alt>Tab']" }
           - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab', '<Alt>Above_Tab']" }
           - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "[]" }
           - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "[]" }
-      tags: ["gnome"]
 
     - role: "dotfiles"
+      tags: ["dotfiles"]
       vars:
         dotfiles__dir: "{{ playbook_dir }}/dotfiles"
-      tags: ["dotfiles"]
