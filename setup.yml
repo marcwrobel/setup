@@ -11,6 +11,7 @@
     - { role: "apt", tags: ["apt"] }
     - { role: "git", tags: ["git"] }
     - { role: "etckeeper", tags: ["etckeeper"] }
+    - { role: "vim", tags: ["vim"] }
 
     - role: "packages"
       tags: ["packages"]
@@ -33,7 +34,7 @@
           - "gthumb" # image viewer and browser
           - "meld" # graphical tool to diff and merge files
           # Development
-          - "build-essential" # Required by asdf, nodejs
+          - "build-essential" # Required by asdf, Node.js
           - "git" # fast, scalable, distributed revision control system
           - "gitg" # git repository viewer
           - "hexedit" # viewer and editor in hexadecimal or ASCII for files or devices
