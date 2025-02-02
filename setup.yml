@@ -95,6 +95,9 @@
           - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab', '<Alt>Above_Tab']" }
           - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "[]" }
           - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "[]" }
+          - { key: "/org/gnome/mutter/dynamic-workspaces", value: "false" }
+          - { key: "/org/gnome/desktop/wm/preferences/num-workspaces", value: "4" }
+          - { key: "/org/gnome/shell/window-switcher/current-workspace-only", value: "true" }
 
     - role: "dotfiles"
       tags: ["dotfiles"]
