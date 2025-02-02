@@ -1,0 +1,11 @@
+---
+- name: "Copy banner"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop:
+    - "etc/motd"
+  become: true

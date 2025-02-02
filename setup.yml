@@ -3,7 +3,8 @@
   hosts: localhost
   connection: local
   roles:
-    - role: "bootstrap"
+    - { role: "bootstrap", tags: ["bootstrap"] }
+    - { role: "banner", tags: ["banner"] }
 
     - role: "packages"
       tags: ["packages"]
