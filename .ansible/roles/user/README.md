@@ -1,6 +1,6 @@
 # packages
 
-Set up dotfiles.
+Set up user and its dotfiles.
 
 ## Links
 

@@ -1,0 +1,12 @@
+---
+# User's shell
+# user__shell: "/bin/bash"
+
+# User's additional groups
+# user__groups: "sudo,docker"
+
+# Path to the dotfiles directory.
+# user__dotfiles_dir: "{{ playbook_dir }}/dotfiles"
+
+# Paths of deprecated files or directories to remove.
+user__dotfiles_deprecated: []

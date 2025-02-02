@@ -1,0 +1,30 @@
+---
+- name: Configure user account
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    create_home: false
+    shell: "{{ user__shell }}"
+    groups: "{{ user__groups }}"
+    append: true
+    umask: "027"
+  become: true
+
+- name: Install ansible.posix.synchronize required packages
+  ansible.builtin.package:
+    name: "rsync"
+    state: "present"
+  become: true
+
+- name: Copy user's dotfiles
+  ansible.posix.synchronize:
+    src: "{{ user__dotfiles_dir }}/"
+    dest: "{{ ansible_env.HOME }}"
+    archive: true
+    delete: false
+
+- name: Remove deprecated user's dotfiles
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/{{ item }}"
+    state: "absent"
+    recurse: true
+  loop: "{{ user__dotfiles_deprecated }}"

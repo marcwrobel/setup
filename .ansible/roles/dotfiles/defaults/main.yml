@@ -1,6 +1,0 @@
----
-# Path to the dotfiles directory.
-dotfiles__dir: "{{ playbook_dir }}/dotfiles"
-
-# Paths of deprecated files or directories to remove.
-dotfiles__deprecated: []

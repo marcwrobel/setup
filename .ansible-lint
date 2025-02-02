@@ -6,5 +6,5 @@ use_default_rules: true
 # so some files are excluded from the linting process.
 exclude_paths:
   - .ansible/roles/gnome/tasks/main.yml # community.general.dconf
-  - .ansible/roles/dotfiles/tasks/main.yml # ansible.posix.synchronize
+  - .ansible/roles/user/tasks/main.yml # ansible.posix.synchronize
   - .ansible/roles/vim/tasks/main.yml # community.general.alternatives

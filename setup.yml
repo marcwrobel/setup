@@ -99,7 +99,10 @@
           - { key: "/org/gnome/desktop/wm/preferences/num-workspaces", value: "4" }
           - { key: "/org/gnome/shell/window-switcher/current-workspace-only", value: "true" }
 
-    - role: "dotfiles"
-      tags: ["dotfiles"]
+    - role: "user"
+      tags: ["user"]
       vars:
-        dotfiles__dir: "{{ playbook_dir }}/dotfiles"
+        user__shell: "/bin/bash"
+        user__groups: "sudo,docker"
+        user__dotfiles_dir: "{{ playbook_dir }}/dotfiles"
+        user__dotfiles_deprecated: []
