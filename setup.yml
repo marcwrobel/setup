@@ -5,8 +5,22 @@
   roles:
     - { role: "bootstrap", tags: ["bootstrap"] }
     - { role: "banner", tags: ["banner"] }
-    - { role: "sysctl", tags: ["sysctl"] }
-    - { role: "limits", tags: ["limits"] }
+
+    - role: "sysctl"
+      vars:
+        sysctl__additional_variables:
+          fs.inotify.max_user_watches:
+            description: "For IDEs like IntelliJ IDEA, see https://intellij-support.jetbrains.com/hc/en-us/articles/15268113529362-Inotify-Watches-Limit-Linux"
+            value: "1048576"
+      tags: ["sysctl"]
+
+    - role: "limits"
+      vars:
+        limits__additional:
+          - { domain: "{{ ansible_user_id }}", type: "-", item: "nproc", value: "2048" }
+          - { domain: "{{ ansible_user_id }}", type: "-", item: "nofile", value: "4096" }
+      tags: ["limits"]
+
     - { role: "root", tags: ["root"] }
     - { role: "sudo", tags: ["sudo"] }
 
