@@ -1,4 +1,23 @@
 ---
+- name: Enforce root system group
+  ansible.builtin.group:
+    name: "root"
+    gid: "0"
+    system: true
+    state: "present"
+
+- name: Enforce root system account
+  ansible.builtin.user:
+    name: "root"
+    state: "present"
+    group: "root"
+    home: "/root"
+    uid: "0"
+    groups: ""
+    append: false
+    system: true
+    shell: "/bin/bash"
+
 - name: Enforce root home permissions
   ansible.builtin.file:
     path: "/root"
