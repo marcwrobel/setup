@@ -20,6 +20,7 @@
             state: "present"
 
     - { role: "openssh_client", tags: ["ssh"] }
+    # - { role: "openssh_server", tags: ["ssh"] }
     - { role: "git", tags: ["git"] }
     - { role: "etckeeper", tags: ["etc"] }
     - { role: "vim", tags: ["vim"] }
