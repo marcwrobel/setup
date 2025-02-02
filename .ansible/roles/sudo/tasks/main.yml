@@ -1,0 +1,23 @@
+---
+- name: Install sudo
+  ansible.builtin.package:
+    name: "sudo"
+    state: "present"
+  become: true
+
+- name: Delete sudoers.d directory exists
+  ansible.builtin.file:
+    path: "/etc/sudoers.d"
+    state: "absent"
+  become: true
+
+- name: Copy global configuration
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0440"
+  loop:
+    - "etc/sudoers"
+  become: true

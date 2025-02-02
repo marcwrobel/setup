@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+
+# To enable sudo to be invoked from a real tty but not through methods such as cron or cgi-bin scripts.
+# Not activated - needed by Ansible for pipelining (see https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining).
+Defaults requiretty
+
+# Prevent arbitrary code execution as your user when sudoing to another user due to TTY hijacking via TIOCSTI ioctl.
+# https://ruderich.org/simon/notes/su-sudo-from-root-tty-hijacking
+Defaults use_pty
+
+# Reset environment
+Defaults env_reset
+Defaults:%sudo env_keep =  "COLORS LS_COLORS MAIL GREP_COLOR" # harmless preservation of a user preference
+Defaults:%sudo env_keep += "EDITOR" # different sudoers have their choice of editor respected
+Defaults:%sudo env_keep += "SSH_AGENT_PID SSH_AUTH_SOCK" # "sudo scp" or "sudo rsync" should be able to use SSH agent
+Defaults:%sudo env_keep += "GPG_AGENT_INFO" # Ditto for GPG agent
+
+# Refuse to run if unable to disable echo on the tty.
+Defaults !visiblepw
+
+# Send email on bad password
+Defaults mail_badpass
+
+# Log sudo sessions input / outputs
+Defaults log_input, log_output, iolog_dir = /var/log/sudo-io/%{user}
+Defaults!/usr/bin/sudoreplay !log_output
+
+# We do not trust sudo users to have a secure PATH. This is the path used for every command run with sudo.
+Defaults secure_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# User privilege specification
+root ALL=(ALL:ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo	ALL=(ALL:ALL) ALL
