@@ -1,4 +1,4 @@
-A local Ansible playbook for setting up my environment.
+A local-only Ansible playbook for setting up current user's environment.
 
 ## Getting Started
 
