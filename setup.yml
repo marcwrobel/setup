@@ -6,6 +6,7 @@
     - { role: "bootstrap", tags: ["bootstrap"] }
     - { role: "banner", tags: ["banner"] }
     - { role: "apt", tags: ["apt"] }
+    - { role: "etckeeper", tags: ["etckeeper"] }
 
     - role: "packages"
       tags: ["packages"]
