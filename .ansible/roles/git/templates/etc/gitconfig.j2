@@ -1,0 +1,48 @@
+# {{ ansible_managed }}
+# See https://git-scm.com/docs/git-config and https://www.git-scm.com/docs/git-log.
+
+[alias]
+  # A better git log
+  lg = log --graph --abbrev-commit --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+[diff]
+  # Colors moved lines in diffs differently.
+  colorMoved = true
+  # Uses a prefix pair that is different from the standard "a/" and "b/" depending on what is being compared
+  mnemonicprefix = true
+
+[fetch]
+  # Remove remote-tracking references that no longer exist on the remote.
+  prune = true
+  # Remove any local tags that no longer exist on the remote
+  pruneTags = true
+
+[pull]
+  # fast-forward only
+  ff = only
+  # Rebase branches on top of the fetched branch, instead of merging.
+  rebase = true
+
+[push]
+  # Pushes the current branch with the same name on the remote.
+  default = simple
+  # Pushes annotated tags in refs/tags that are missing from the remote.
+  followTags = true
+
+[rebase]
+  # Always show a diffstat of what changed upstream since the last rebase.
+  stat = true
+
+[status]
+  # Show individual files in untracked directories.
+  showUntrackedFiles = all
+
+[transfer]
+  # Abort when a malformed object or a link to a nonexistent object is detected.
+  fsckObjects = true
+
+[filter "lfs"]
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
