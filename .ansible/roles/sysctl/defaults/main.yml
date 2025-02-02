@@ -1,0 +1,17 @@
+---
+# Maximum amount of shared memory a process can reserve for itself
+sysctl__shmmax: "{{ sysctl__kernel_shmmax_default }}"
+
+# Number of memory pages that can be used for shared memory.
+# 4096 is the standard page size on Debian / CentOS / RedHat. Use `getconf PAGE_SIZE` to get your system PAGE_SIZE.
+sysctl__shmall: "{{ sysctl__kernel_shmall_default }}"
+
+# Whether to enable or disable ip forward
+sysctl__ip_forward: false
+
+# Additional parameters propagated via configuration.
+# Format is :
+# - <variable>:
+#    description: <description>
+#    value: <value>
+sysctl__additional_variables: {}

@@ -1,0 +1,18 @@
+---
+- name: "Delete sysctl.d directory"
+  ansible.builtin.file:
+    path: "/etc/sysctl.d"
+    state: "absent"
+  become: true
+
+- name: "Configure sysctl parameters"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop:
+    - "etc/sysctl.conf"
+  notify: "Reload sysctl settings"
+  become: true
