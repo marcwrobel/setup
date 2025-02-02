@@ -5,6 +5,7 @@
   roles:
     - { role: "bootstrap", tags: ["bootstrap"] }
     - { role: "banner", tags: ["banner"] }
+    - { role: "root", tags: ["root"] }
     - { role: "apt", tags: ["apt"] }
     - { role: "git", tags: ["git"] }
     - { role: "etckeeper", tags: ["etckeeper"] }
