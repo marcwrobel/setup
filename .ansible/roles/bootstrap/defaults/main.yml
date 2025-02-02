@@ -4,4 +4,4 @@ bootstrap__upgrade_packages: true
 
 # Name of the package to install for python-apt.
 # See https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html#requirements.
-bootstrap__python_apt_package: 'python3-apt'
+bootstrap__python_apt_package: "python3-apt"
