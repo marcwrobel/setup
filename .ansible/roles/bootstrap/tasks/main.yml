@@ -1,0 +1,33 @@
+---
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html#facts-d-or-local-facts
+- name: 'Create facts.d directory'
+  ansible.builtin.file:
+    path: '/etc/ansible/facts.d'
+    state: 'directory'
+    mode: '0755'
+  become: true
+
+- name: 'Perform initial packages upgrade'
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: 'safe'
+  become: true
+  when: 'bootstrap__upgrade_packages and ansible_local.bootstrap is not defined'
+
+- name: 'Install python3-apt'
+  ansible.builtin.package:
+    name: '{{ bootstrap__python_apt_package }}'
+    state: 'present'
+  become: true
+  check_mode: false # python-apt is required to use Ansible check mode - so it must be installed even in check mode
+
+- name: 'Copy role local facts'
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  loop:
+    - 'etc/ansible/facts.d/bootstrap.fact'
+  become: true

@@ -3,6 +3,8 @@
   hosts: localhost
   connection: local
   roles:
+    - role: "bootstrap"
+
     - role: "packages"
       tags: ["packages"]
       vars:

@@ -1,4 +1,4 @@
-A local-only Ansible playbook for setting up current user's environment.
+A local-only Ansible playbook for setting up current user's environment on a Debian-based system.
 
 ## Getting Started
 
