@@ -2,6 +2,8 @@
 profile: production
 use_default_rules: true
 
+# Running ansible-lint with uvx triggers unskippable syntax-check[unknown-module] errors for non-core modules,
+# so some files are excluded from the linting process.
 exclude_paths:
-  # ansible-lint with uvx triggers an unskippable syntax-check[unknown-module] because of community.general.dconf
-  - .ansible/roles/gnome/tasks/main.yml
+  - .ansible/roles/gnome/tasks/main.yml # community.general.dconf
+  - .ansible/roles/dotfiles/tasks/main.yml # ansible.posix.synchronize

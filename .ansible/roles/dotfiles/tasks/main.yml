@@ -1,0 +1,20 @@
+---
+- name: Install ansible.posix.synchronize required packages
+  ansible.builtin.package:
+    name: "rsync"
+    state: "present"
+  become: true
+
+- name: Copy dotfiles
+  ansible.posix.synchronize:
+    src: "{{ dotfiles__dir }}/"
+    dest: "{{ ansible_env.HOME }}"
+    archive: true
+    delete: false
+
+- name: Remove deprecated dotfiles
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/{{ item }}"
+    state: "absent"
+    recurse: true
+  loop: "{{ dotfiles__deprecated }}"

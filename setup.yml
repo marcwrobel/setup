@@ -58,16 +58,7 @@
           - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "[]" }
       tags: ["gnome"]
 
-  tasks:
-    - name: Set up dotfiles
-      ansible.builtin.copy:
-        src: "{{ item }}"
-        dest: '{{ ansible_env.HOME }}/{{ item | regex_replace(".*dotfiles/", "") }}'
-        owner: "{{ ansible_user_id }}"
-        mode: "preserve"
-      with_fileglob:
-        - "./dotfiles/*"
-        - "./dotfiles/.*"
-        - "./dotfiles/.bashrc.d/*"
-        - "./dotfiles/.m2/*"
-        - "./dotfiles/bin/*"
+    - role: "dotfiles"
+      vars:
+        dotfiles__dir: "{{ playbook_dir }}/dotfiles"
+      tags: ["dotfiles"]
