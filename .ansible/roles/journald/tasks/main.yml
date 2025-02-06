@@ -1,0 +1,21 @@
+---
+- name: Create systemd journal directories
+  ansible.builtin.file:
+    path: "/var/log/journal"
+    state: "directory"
+    owner: "root"
+    group: "systemd-journal"
+    mode: "02755"
+  become: true
+
+- name: Configure journalisation
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop:
+    - "etc/systemd/journald.conf"
+  notify: "restart systemd-journald"
+  become: true

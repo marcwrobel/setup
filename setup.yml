@@ -21,6 +21,7 @@
           - { domain: "{{ ansible_user_id }}", type: "-", item: "nofile", value: "4096" }
       tags: ["limits"]
 
+    - { role: "journald", tags: ["journald"] }
     - { role: "root", tags: ["root"] }
     - { role: "sudo", tags: ["sudo"] }
 
