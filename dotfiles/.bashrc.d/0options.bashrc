@@ -15,8 +15,8 @@ shopt -s globstar
 shopt -s histappend
 
 # Set history length.
-HISTSIZE=1000
-HISTFILESIZE=1000
+HISTSIZE=1000000
+HISTFILESIZE=$HISTSIZE
 
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
