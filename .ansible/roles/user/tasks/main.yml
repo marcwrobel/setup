@@ -24,7 +24,6 @@
 
 - name: Remove deprecated user's dotfiles
   ansible.builtin.file:
-    src: "{{ ansible_env.HOME }}/{{ item }}"
+    path: "{{ ansible_env.HOME }}/{{ item }}"
     state: "absent"
-    recurse: true
   loop: "{{ user__dotfiles_deprecated }}"
