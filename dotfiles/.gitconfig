@@ -27,28 +27,54 @@
   pr = pull --rebase
   s = status
 
+[branch]
+  # Better branch listing.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-branchsort
+  sort = -committerdate
+
 [color]
   # Colorize output.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-colorui
+  ui = auto
+
+[column]
+  # Output in columns.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-columnui
   ui = auto
 
 [commit]
   # All commits should be GPG signed.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-commitgpgSign
   gpgSign = true
+  # Put the whole diff output at the bottom of the commit message template
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-commitverbose
+  verbose = true
 
 [core]
   # Global gitignore.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreexcludesFile
   excludesFile = ~/.gitignore_global
+  # Enable the built-in file system monitor daemon for speed up some commands.
+  # Maybe it shouldn’t be a default, but it’s not very bad and can make a big difference.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor
+  fsmonitor = true
+  #
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreuntrackedCache
+  untrackedCache = true
 
 [diff]
+  # Produce more readable diffs.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-codediffalgorithmcode
+  algorithm = histogram
   # Colors moved lines in diffs differently.
-  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffcolorMoved
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-codediffcolorMovedcode
   colorMoved = true
   # Uses a prefix pair that is different from the standard "a/" and "b/" depending on what is being compared
-  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffmnemonicPrefix
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-codediffmnemonicPrefixcode
   mnemonicprefix = true
+  # Detect renames.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-codediffrenamescode
+  renames = true
 
 [fetch]
   # Remove remote-tracking references that no longer exist on the remote.
@@ -57,6 +83,24 @@
   # Remove any local tags that no longer exist on the remote
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchpruneTags
   pruneTags = true
+  # Attempt to update all available remotes.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchall
+  all = true
+
+[help]
+  # When typos are detected, show the suggestion and prompt for confirmation to run the command
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-helpautoCorrect
+  autocorrect = prompt
+
+[init]
+  # The default branch name for new repositories.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-codeinitdefaultBranchcode
+  defaultBranch = main
+
+[merge]
+  # Insert what the base of it looked like too.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle
+  conflictstyle = zdiff3
 
 # Use diff-highlight for diffs. See https://git.kernel.org/pub/scm/git/git.git/tree/contrib/diff-highlight/README or
 # https://veronneau.org/a-better-git-diff.html.
@@ -74,6 +118,9 @@
   rebase = true
 
 [push]
+  # Assume --set-upstream on default push when no upstream tracking exists for the current branch
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+  autoSetupRemote = true
   # Pushes the current branch with the same name on the remote.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
   default = simple
@@ -82,9 +129,26 @@
   followTags = true
 
 [rebase]
+  # https://blog.gitbutler.com/git-autosquash/
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoSquash
+  autoSquash = true
+  # Be able to run rebases on a dirty worktree.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeautoStash
+  autoStash = true
+  # Automatically force-update any branches that point to commits that are being rebased.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseupdateRefs
+  updateRefs = true
   # Always show a diffstat of what changed upstream since the last rebase.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebasestat
   stat = true
+
+[rerere]
+  # Activate recording of resolved conflicts.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerereenabled
+  enabled = true
+  # Automatically re-apply the resolutions if it sees them again.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerereautoUpdate
+  autoupdate = true
 
 [status]
   # Show individual files in untracked directories.
@@ -96,6 +160,9 @@
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-taggpgSign
   gpgSign = true
   forceSignAnnotated = true
+  # Tags are usually versions, so sort them accordingly.
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-tagsort
+  sort = version:refname
 
 
 [transfer]
