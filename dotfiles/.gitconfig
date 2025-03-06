@@ -1,3 +1,5 @@
+# See https://blog.gitbutler.com/how-git-core-devs-configure-git/.
+
 [alias]
   # List aliases (https://www.becomebetterprogrammer.com/git-alias/).
   aliases = git config --get-regexp alias
@@ -5,6 +7,8 @@
   br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   # Delete merged branches (https://stackoverflow.com/questions/35171513/how-to-alias-in-git-delete-merged-branches).
   cleanup = !git branch --merged | grep -vE 'main|master|\\*' | xargs -n 1 git branch -d
+  # https://medium.com/@kcmueller/delete-local-git-branches-that-were-deleted-on-remote-repository-b596b71b530c
+  cleanup-gone = !git branch -vv | grep ': gone]' |  grep -v '\\*' | tr -s ' ' | cut -d ' ' -f 2 | xargs -r git branch -D
   # Temporarily ignore files (https://coderwall.com/p/gjp15g/git-temporarily-ignoring-files).
   freeze = !git update-index --assume-unchanged
   unfreeze = !git update-index --no-assume-unchanged
@@ -54,13 +58,6 @@
   # Global gitignore.
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreexcludesFile
   excludesFile = ~/.gitignore_global
-  # Enable the built-in file system monitor daemon for speed up some commands.
-  # Maybe it shouldn’t be a default, but it’s not very bad and can make a big difference.
-  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor
-  fsmonitor = true
-  #
-  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreuntrackedCache
-  untrackedCache = true
 
 [diff]
   # Produce more readable diffs.
@@ -105,9 +102,9 @@
 # Use diff-highlight for diffs. See https://git.kernel.org/pub/scm/git/git.git/tree/contrib/diff-highlight/README or
 # https://veronneau.org/a-better-git-diff.html.
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 
 [pull]
   # fast-forward only
