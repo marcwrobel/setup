@@ -10,18 +10,18 @@ asdf plugin-add uv
 asdf install
 ```
 
-Finally run the playbook with:
+Finally, run the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml
+uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --check
 ```
 
 ## Running parts of the playbook
 
-You can run specific parts of the playbook with:
+You can run specific parts of the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --tags <tag>
+uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --tags <tag>  --check
 ```
 
 ## Linting
