@@ -34,6 +34,11 @@
             key_format: "asc"
             repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
             state: "present"
+          - name: "github-cli"
+            key_url: "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
+            key_format: "gpg"
+            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/github-cli.gpg] https://cli.github.com/packages stable main"
+            state: "present"
 
     - { role: "openssh_client", tags: ["ssh"] }
     # - { role: "openssh_server", tags: ["ssh"] }
@@ -102,6 +107,8 @@
           - "docker-ce-rootless-extras"
           - "docker-compose-plugin" # from docker
           - "slirp4netns"
+          # github-cli, see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+          - "gh"
 
     - role: "gnome"
       tags: ["gnome"]
