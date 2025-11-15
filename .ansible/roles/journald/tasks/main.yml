@@ -17,5 +17,5 @@
     mode: "0644"
   loop:
     - "etc/systemd/journald.conf"
-  notify: "restart systemd-journald"
+  notify: "Restart systemd-journald"
   become: true
