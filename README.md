@@ -13,7 +13,7 @@ asdf install
 Finally, run the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --check
+uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check
 ```
 
 ## Running parts of the playbook
@@ -21,7 +21,7 @@ uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --check
 You can run specific parts of the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=11' ansible-playbook --ask-become-pass setup.yml --tags <tag>  --check
+uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --tags <tag>  --check
 ```
 
 ## Linting
