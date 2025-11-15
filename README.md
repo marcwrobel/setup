@@ -6,7 +6,7 @@ First clone this repository and install [`asdf`](https://asdf-vm.com/guide/getti
 
 Then install the plugins and the versions specified in the `.tool-versions` file:
 ```bash
-asdf plugin-add uv
+asdf plugin add uv
 asdf install
 ```
 
