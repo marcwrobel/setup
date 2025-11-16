@@ -98,15 +98,14 @@
           - "pass" # lightweight directory-based password manager
           - "uuid" # Universally Unique Identifier Command-Line Tool
           - "renrot" # rename and rotate files according to EXIF tags
+          - "wl-clipboard" # Command-line copy/paste utilities for Wayland
           # Docker external repository, see https://docs.docker.com/engine/install/debian/
-          - "cgroupfs-mount"
           - "containerd.io"
           - "docker-buildx-plugin" # from docker
           - "docker-ce"
           - "docker-ce-cli"
           - "docker-ce-rootless-extras"
           - "docker-compose-plugin" # from docker
-          - "slirp4netns"
           # github-cli, see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
           - "gh"
 
@@ -115,9 +114,9 @@
       vars:
         gnome__dconf:
           - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "['<Alt>Tab']" }
-          - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab', '<Alt>Above_Tab']" }
-          - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "[]" }
-          - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "[]" }
+          - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab']" }
+          - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "['<Super>Tab']" }
+          - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "['<Shift><Super>Tab']" }
           - { key: "/org/gnome/mutter/dynamic-workspaces", value: "false" }
           - { key: "/org/gnome/desktop/wm/preferences/num-workspaces", value: "4" }
           - { key: "/org/gnome/shell/window-switcher/current-workspace-only", value: "true" }
@@ -128,18 +127,4 @@
         user__shell: "/bin/bash"
         user__groups: "sudo,docker"
         user__dotfiles_dir: "{{ playbook_dir }}/dotfiles"
-        user__dotfiles_deprecated:
-          - ".bashrc.d/8ansible-completion.bashrc"
-          - ".bashrc.d/8ansible-doc-completion.bashrc"
-          - ".bashrc.d/8ansible-galaxy-completion.bashrc"
-          - ".bashrc.d/8ansible-playbook-completion.bashrc"
-          - ".bashrc.d/8ansible-pull-completion.bashrc"
-          - ".bashrc.d/8ansible-vault-completion.bashrc"
-          - ".bashrc.d/8gradle-completion.bashrc"
-          - ".bashrc.d/8maven-completion.bashrc"
-          - ".bashrc.d/8quarkus-completion.bashrc"
-          - ".bashrc.d/9asdf.bashrc"
-          - ".bashrc.d/9gpg.bashrc"
-          - ".bashrc.d/9npm.bashrc"
-          - ".bashrc.d/9ruby.bashrc"
-          - ".bashrc.d/9sdkman.bashrc"
+        user__dotfiles_deprecated: []
