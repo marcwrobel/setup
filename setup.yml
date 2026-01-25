@@ -18,7 +18,11 @@
       vars:
         limits__additional:
           - { domain: "{{ ansible_facts['user_id'] }}", type: "-", item: "nproc", value: "2048", description: "For IDEs like IntelliJ IDEA" }
-          - { domain: "{{ ansible_facts['user_id'] }}", type: "-", item: "nofile", value: "524288", description: "For IDEs like IntelliJ IDEA, for Lutris" }
+          - domain: "{{ ansible_facts['user_id'] }}"
+            type: "-"
+            item: "nofile"
+            value: "524288"
+            description: "For IDEs like IntelliJ IDEA, for Lutris"
       tags: ["limits"]
 
     - { role: "journald", tags: ["journald"] }
