@@ -1,12 +1,12 @@
 ---
 # Base amount of memory used for shared memory calculations.
-sysctl__kernel_shm_base: "{{ ((ansible_memtotal_mb | int * 1024 * 1024) - 8192) }}"
+sysctl__kernel_shm_base: "{{ ((ansible_facts['memtotal_mb'] | int * 1024 * 1024) - 8192) }}"
 
 # Maximum size of shared memory segment as % of available memory
-sysctl__kernel_shmmax_limiter: "{{ 0.5 if (ansible_memtotal_mb | int >= 4096) else 0.2 }}"
+sysctl__kernel_shmmax_limiter: "{{ 0.5 if (ansible_facts['memtotal_mb'] | int >= 4096) else 0.2 }}"
 
 # How much of the total memory is reserved for shared memory.
-sysctl__kernel_shmall_limiter: "{{ 0.8 if (ansible_memtotal_mb | int >= 4096) else 0.5 }}"
+sysctl__kernel_shmall_limiter: "{{ 0.8 if (ansible_facts['memtotal_mb'] | int >= 4096) else 0.5 }}"
 
 # Maximum amount of shared memory a process can reserve for itself
 sysctl__kernel_shmmax_default: "{{ (sysctl__kernel_shm_base | int * sysctl__kernel_shmmax_limiter | float) | round | int }}"

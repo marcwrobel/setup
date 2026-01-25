@@ -12,7 +12,7 @@
     update_cache: true
     upgrade: "safe"
   become: true
-  when: "bootstrap__upgrade_packages and ansible_local.bootstrap is not defined"
+  when: "bootstrap__upgrade_packages and ansible_facts['local']['bootstrap'] is not defined"
 
 - name: "Install python3-apt"
   ansible.builtin.package:

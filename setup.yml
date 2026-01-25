@@ -17,8 +17,8 @@
     - role: "limits"
       vars:
         limits__additional:
-          - { domain: "{{ ansible_user_id }}", type: "-", item: "nproc", value: "2048", description: "For IDEs like IntelliJ IDEA" }
-          - { domain: "{{ ansible_user_id }}", type: "-", item: "nofile", value: "524288", description: "For IDEs like IntelliJ IDEA, for Lutris" }
+          - { domain: "{{ ansible_facts['user_id'] }}", type: "-", item: "nproc", value: "2048", description: "For IDEs like IntelliJ IDEA" }
+          - { domain: "{{ ansible_facts['user_id'] }}", type: "-", item: "nofile", value: "524288", description: "For IDEs like IntelliJ IDEA, for Lutris" }
       tags: ["limits"]
 
     - { role: "journald", tags: ["journald"] }
@@ -32,7 +32,7 @@
           - name: "docker"
             key_url: "https://download.docker.com/linux/debian/gpg"
             key_format: "asc"
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable"
             state: "present"
           - name: "github-cli"
             key_url: "https://cli.github.com/packages/githubcli-archive-keyring.gpg"

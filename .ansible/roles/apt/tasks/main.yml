@@ -21,7 +21,7 @@
 
 - name: "Configure default repositories"
   ansible.builtin.template:
-    src: "etc/apt/sources.list-{{ ansible_distribution }}.j2"
+    src: "etc/apt/sources.list-{{ ansible_facts['distribution'] }}.j2"
     dest: "/etc/apt/sources.list"
     owner: "root"
     group: "root"
