@@ -36,7 +36,7 @@
           - name: "docker"
             key_url: "https://download.docker.com/linux/debian/gpg"
             key_format: "asc"
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable"
+            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable" # noqa yaml[line-length]
             state: "present"
           - name: "github-cli"
             key_url: "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
