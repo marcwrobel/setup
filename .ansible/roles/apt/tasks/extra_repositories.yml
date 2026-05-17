@@ -5,6 +5,8 @@
     dest: "/etc/apt/keyrings/{{ item.name }}.{{ item.key_format }}"
     mode: "0644"
     force: true # replace if the content changes
+  notify:
+    - "Update package indexes"
   when: "item.state == 'present'"
   become: true
 
@@ -12,6 +14,8 @@
   ansible.builtin.file:
     path: "/etc/apt/trusted.gpg.d/{{ item.name }}.{{ item.key_format }}"
     state: "absent"
+  notify:
+    - "Update package indexes"
   when: "item.state == 'absent'"
   become: true
 
@@ -21,6 +25,6 @@
     repo: "{{ item.repo }}"
     state: "{{ item.state }}" # noqa: args[module] (variable)
     update_cache: false
-  become: true
   notify:
     - "Update package indexes"
+  become: true
