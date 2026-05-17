@@ -144,3 +144,6 @@
         user__dotfiles_deprecated:
           - ".bashrc.d/5asdf.bashrc"
           - ".tool-versions"
+        user__permissions:
+          - { path: ".gnupg", mode: "0700" }
+          - { path: ".ssh", mode: "0700" }

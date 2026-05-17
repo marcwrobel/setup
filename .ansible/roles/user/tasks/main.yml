@@ -21,9 +21,16 @@
     dest: "{{ ansible_facts['env']['HOME'] }}"
     archive: true
     delete: false
+    perms: false
 
 - name: Remove deprecated user's dotfiles
   ansible.builtin.file:
     path: "{{ ansible_facts['env']['HOME'] }}/{{ item }}"
     state: "absent"
   loop: "{{ user__dotfiles_deprecated }}"
+
+- name: Fix user's sensitive file permissions
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/{{ item.path }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ user__permissions }}"
