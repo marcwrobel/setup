@@ -12,6 +12,6 @@
 user__dotfiles_deprecated: []
 
 # Permissions to set on user's sensitive files.
-#user__permissions:
-#  - { path: ".gnupg", mode: "0700" }
-#  - { path: ".ssh", mode: "0700" }
+# user__permissions:
+#   - { path: ".gnupg", mode: "0700" }
+#   - { path: ".ssh", mode: "0700" }
