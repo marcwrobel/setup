@@ -26,20 +26,13 @@ This is a local-only Ansible playbook for setting up a user's environment on a D
 ### Prerequisites
 1. Install [`mise`](https://mise.en.dev/getting-started.html)
 
-### Running the Playbook
-- **Check mode (dry-run)**: `uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check`
-- **Apply changes**: `uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml`
-- **Run specific roles**: `uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --tags <tag> --check`
+### Commands
+- **Check mode (dry-run)**: `mise check`
+- **Apply changes**: `mise apply`
+- **Run specific roles**: `mise check --tags <tag>`
   - Example: `--tags apt,git` runs only apt and git configuration
-
-### Linting
-- **Lint all files (strict mode, auto-fix)**: `uvx ansible-lint --strict --fix=all`
-- **Lint with no color output**: `uvx ansible-lint --nocolor --strict`
-- **CI runs**: `uvx ansible-lint --strict` (check mode in CI/CD)
-
-### Checking Tool Versions
-- `uvx --from 'ansible' ansible --version`
-- `uvx ansible-lint --nocolor --version`
+- **Lint all files (strict mode, auto-fix)**: `mise lint`
+- **Check Tool Versions**: `mise ansible-versions`
 
 ## Key Conventions
 
@@ -72,7 +65,7 @@ Some roles are excluded from ansible-lint because they use community collections
 - `.ansible/roles/user/tasks/main.yml` - Uses `ansible.posix.synchronize`
 - `.ansible/roles/vim/tasks/main.yml` - Uses `community.general.alternatives`
 
-See `.ansible-lint` for exclusion list.
+See `.ansible-lint` for the exclusion list.
 
 ### Ansible Configuration
 - **`ansible.cfg`** sets:

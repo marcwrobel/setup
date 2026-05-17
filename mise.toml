@@ -1,2 +1,27 @@
+# See https://mise.jdx.dev/configuration/settings.html.
+[settings]
+lockfile = true
+
 [tools]
 uv = '0.11.14'
+
+[tasks.check]
+description = """Run the setup.yml playbook in check mode.
+
+Use --tags <tag> to restrict the run to a part of the playbook."""
+run = "uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check"
+
+[tasks.apply]
+description = """Run the setup.yml playbook.
+
+Use --tags <tag> to restrict the run to a part of the playbook"""
+run = "uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml"
+
+[tasks.lint]
+description = "Lint the code using ansible-lint."
+run = "uvx ansible-lint --strict --fix=all"
+
+[tasks.ansible-versions]
+description = "Show ansible and ansible-lint versions."
+run = """mise exec uv -- uvx --from 'ansible' ansible --version
+mise exec uv -- uvx ansible-lint --nocolor --version"""

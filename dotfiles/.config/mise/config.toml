@@ -3,6 +3,7 @@
 [settings]
 cache_prune_age = '7d'
 disable_backends = ['asdf']
+java.shorthand_vendor = 'temurin'
 minimum_release_age = '3d'
 paranoid = true
 
@@ -10,5 +11,3 @@ paranoid = true
 maven = '3.9'
 node = '24'
 ruby = '3.4'
-
-java.shorthand_vendor = 'temurin'
