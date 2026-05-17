@@ -43,6 +43,11 @@
             key_format: "gpg"
             repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/github-cli.gpg] https://cli.github.com/packages stable main"
             state: "present"
+          - name: "mise"
+            key_url: "https://mise.en.dev/gpg-key.pub"
+            key_format: "asc"
+            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/mise.asc] https://mise.en.dev/deb stable main"
+            state: "present"
 
     - { role: "openssh_client", tags: ["ssh"] }
     # - { role: "openssh_server", tags: ["ssh"] }
@@ -78,11 +83,13 @@
           - "gthumb" # image viewer and browser
           - "meld" # graphical tool to diff and merge files
           # Development
-          - "build-essential" # Required by asdf, Node.js
+          - "build-essential" # Required by mise (Ruby), Node.js
           - "git" # fast, scalable, distributed revision control system
           - "gitg" # git repository viewer
           - "hexedit" # viewer and editor in hexadecimal or ASCII for files or devices
-          - "libssl-dev" # needed while installing ruby using asdf
+          - "openjdk-25-doc" # OpenJDK Development Kit (JDK) documentation
+          - "openjdk-25-jdk" # OpenJDK Development Kit (JDK)
+          - "openjdk-25-source" # OpenJDK Development Kit (JDK) source files
           # Editors
           - "geany" # fast and lightweight IDE
           - "geany-plugins" # set of plugins for Geany
@@ -113,6 +120,8 @@
           - "docker-compose-plugin" # from docker
           # github-cli, see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
           - "gh"
+          # mise, see https://mise.jdx.dev/getting-started.html
+          - "mise"
 
     - role: "gnome"
       tags: ["gnome"]
@@ -132,4 +141,6 @@
         user__shell: "/bin/bash"
         user__groups: "sudo,docker"
         user__dotfiles_dir: "{{ playbook_dir }}/dotfiles"
-        user__dotfiles_deprecated: []
+        user__dotfiles_deprecated:
+          - ".bashrc.d/5asdf.bashrc"
+          - ".tool-versions"

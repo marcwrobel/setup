@@ -2,18 +2,12 @@ A local-only Ansible playbook for setting up current user's environment on a Deb
 
 ## Getting Started
 
-First clone this repository and install [`asdf`](https://asdf-vm.com/guide/getting-started.html) on the environment you want to set up.
+First clone this repository and install [`mise`](https://mise.en.dev/getting-started.html) on the environment you want to set up.
 
-Then install the plugins and the versions specified in the `.tool-versions` file:
-```bash
-asdf plugin add uv
-asdf install
-```
-
-Finally, run the playbook (check mode) with:
+Then, run the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check
+mise exec uv -- uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check
 ```
 
 ## Running parts of the playbook
@@ -21,7 +15,7 @@ uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check
 You can run specific parts of the playbook (check mode) with:
 
 ```bash
-uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --tags <tag>  --check
+mise exec uv -- uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --tags <tag>  --check
 ```
 
 ## Linting
@@ -29,14 +23,14 @@ uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --tags <ta
 Code linting is done with `ansible-lint`, and is automatically run by the CI pipeline. You can run it locally with:
 
 ```bash
-uvx ansible-lint --strict --fix=all
+mise exec uv -- uvx ansible-lint --strict --fix=all
 ```
 
 ## Tools versions
 
-You can get tools version with:
+You can get tool versions with:
 
 ```bash
-uvx --from 'ansible' ansible --version
-uvx ansible-lint --nocolor --version
+mise exec uv -- uvx --from 'ansible' ansible --version
+mise exec uv -- uvx ansible-lint --nocolor --version
 ```

@@ -19,14 +19,12 @@ This is a local-only Ansible playbook for setting up a user's environment on a D
 
 ### Important Build/Dependency Management
 - Uses **`uv`** (Python package manager) for dependency isolation and tool execution
-- **`.tool-versions`** specifies uv version (0.9.26) - managed by asdf
 - Ansible and ansible-lint are installed on-demand via `uvx` to avoid system-wide Python pollution
 
 ## Build, Test, and Lint Commands
 
 ### Prerequisites
-1. Install [`asdf`](https://asdf-vm.com/guide/getting-started.html)
-2. Add and install plugins: `asdf plugin add uv && asdf install`
+1. Install [`mise`](https://mise.en.dev/getting-started.html)
 
 ### Running the Playbook
 - **Check mode (dry-run)**: `uvx --from 'ansible>=12' ansible-playbook --ask-become-pass setup.yml --check`
