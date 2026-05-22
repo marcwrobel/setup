@@ -10,4 +10,5 @@ paranoid = true
 [tools]
 maven = '3.9'
 node = '24'
+opencode = 'latest'
 ruby = '3.4'
