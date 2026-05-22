@@ -6,4 +6,4 @@ First clone this repository and install [`mise`](https://mise.en.dev/getting-sta
 
 Then, run the playbook with `mise check` (check mode) or `mise apply`.
 
-For more information, use `mise task`.
+For more information, use `mise tasks`.
