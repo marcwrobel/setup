@@ -10,3 +10,7 @@
     name: "{{ packages__list }}"
     state: "present"
   become: true
+  register: packages_install
+  failed_when:
+    - packages_install is failed
+    - not ansible_check_mode
