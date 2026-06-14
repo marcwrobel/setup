@@ -35,6 +35,7 @@
         apt__extra_repositories:
           - "docker-ce"
           - "github-cli"
+          - "librewolf"
           - "mise"
 
     - { role: "openssh_client", tags: ["ssh"] }
@@ -111,6 +112,8 @@
           - "gh"
           # mise, see https://mise.jdx.dev/getting-started.html
           - "mise"
+          # librewolf
+          - "librewolf"
 
     - role: "gnome"
       tags: ["gnome"]

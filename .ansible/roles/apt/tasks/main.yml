@@ -53,3 +53,7 @@
   notify:
     - "Update package indexes"
   become: true
+
+# Required because package indexes must be updated before installing packages
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
