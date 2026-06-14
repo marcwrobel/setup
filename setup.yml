@@ -122,6 +122,7 @@
           - { key: "/org/gnome/mutter/dynamic-workspaces", value: "false" }
           - { key: "/org/gnome/desktop/wm/preferences/num-workspaces", value: "4" }
           - { key: "/org/gnome/shell/window-switcher/current-workspace-only", value: "true" }
+          - { key: "/org/gnome/desktop/interface/clock-format", value: "'24h'" }
 
     - role: "user"
       tags: ["user"]
