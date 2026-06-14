@@ -30,10 +30,6 @@
     - "Update package indexes"
   become: true
 
-- name: "Configure extra repositories"
-  ansible.builtin.include_tasks: "extra_repositories.yml"
-  loop: "{{ apt__extra_repositories }}"
-
 # Required because package indexes must be updated before installing packages
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
@@ -44,6 +40,16 @@
       - "apt-show-versions"
       - "apt-transport-https"
       - "ca-certificates"
+      - "extrepo"
       - "needrestart"
     state: "present"
+  become: true
+
+- name: "Install extra repositories"
+  ansible.builtin.command: "extrepo enable {{ item }}"
+  args:
+    creates: "/etc/apt/sources.list.d/extrepo_{{ item }}.sources"
+  loop: "{{ apt__extra_repositories }}"
+  notify:
+    - "Update package indexes"
   become: true

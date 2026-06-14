@@ -33,21 +33,9 @@
       tags: ["apt"]
       vars:
         apt__extra_repositories:
-          - name: "docker"
-            key_url: "https://download.docker.com/linux/debian/gpg"
-            key_format: "asc"
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable" # noqa yaml[line-length]
-            state: "present"
-          - name: "github-cli"
-            key_url: "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
-            key_format: "gpg"
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/github-cli.gpg] https://cli.github.com/packages stable main"
-            state: "present"
-          - name: "mise"
-            key_url: "https://mise.en.dev/gpg-key.pub"
-            key_format: "asc"
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/mise.asc] https://mise.en.dev/deb stable main"
-            state: "present"
+          - "docker-ce"
+          - "github-cli"
+          - "mise"
 
     - { role: "openssh_client", tags: ["ssh"] }
     # - { role: "openssh_server", tags: ["ssh"] }
