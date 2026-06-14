@@ -1,7 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "share": "disabled", // prevents /share from uploading conversations to opencode.ai
   "autoupdate": false, // updated through mise
   "server": {
     "port": 4096
+  },
+  "experimental": {
+    "openTelemetry": false // explicit opt-out
   }
 }
