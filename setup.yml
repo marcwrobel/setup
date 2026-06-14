@@ -67,6 +67,7 @@
           - "zstd" # fast lossless compression algorithm -- CLI tool
           # Desktop
           - "chromium" # The open-source version of Chrome
+          - "dconf-editor" # graphical GNOME configuration editor
           - "fonts-recommended" # set of recommended fonts
           - "gthumb" # image viewer and browser
           - "meld" # graphical tool to diff and merge files
