@@ -6,10 +6,11 @@ disable_backends = ['asdf']
 java.shorthand_vendor = 'temurin'
 minimum_release_age = '3d'
 paranoid = true
+ruby.compile = false
 
 [tools]
-maven = '3.9'
-node = '24'
+maven = 'latest'
+node = 'latest'
 opencode = 'latest'
-ruby = '3.4'
+ruby = 'latest'
 usage = 'latest'
