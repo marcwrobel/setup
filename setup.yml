@@ -134,9 +134,7 @@
         user__shell: "/bin/bash"
         user__groups: "sudo,docker"
         user__dotfiles_dir: "{{ playbook_dir }}/dotfiles"
-        user__dotfiles_deprecated:
-          - ".bashrc.d/5asdf.bashrc"
-          - ".tool-versions"
+        user__dotfiles_deprecated: []
         user__permissions:
           - { path: ".gnupg", mode: "0700" }
           - { path: ".ssh", mode: "0700" }
