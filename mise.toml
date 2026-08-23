@@ -3,7 +3,7 @@
 lockfile = true
 
 [tools]
-uv = '0.11.14'
+uv = '0.12.5'
 
 [tasks.check]
 description = """Run the setup.yml playbook in check mode.
